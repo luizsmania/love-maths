@@ -98,9 +98,13 @@ function calculateCorrectAnswer() {
             return [operand1 * operand2, "multiply"]
         }
     } else if (operator === "/") {
-        if(isNaN(userAnswer)){alert("Come on, at least try to answer it buddy")} else {return [operand1 / operand2, "division"]}
-
+        if (isNaN(userAnswer)) {
+            alert("Come on, at least try to answer it buddy")
         } else {
+            return [operand1 / operand2, "division"]
+        }
+
+    } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
     }
@@ -137,8 +141,17 @@ function displayMultiplyQuestion(operand1, operand2) {
 
 }
 
-function displayDivisionQuestion(operand1, operand2) {
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+function displayDivisionQuestion() {
+    let num1 = Math.floor(Math.random() * 50) + 1; // Increase the range to get a wider selection of numbers
+    let num2 = Math.floor(Math.random() * 21) + 3; // Decrease the range by 2 to avoid num2 being equal to 1 or num1
+
+    // Keep generating new numbers until the division results in an integer and num1 is not equal to num2
+    while (num1 % num2 !== 0 || num1 === num2) {
+        num1 = Math.floor(Math.random() * 50) + 1;
+        num2 = Math.floor(Math.random() * 21) + 3;
+    }
+
+    document.getElementById('operand1').textContent = num1;
+    document.getElementById('operand2').textContent = num2;
     document.getElementById('operator').textContent = '/';
 }
